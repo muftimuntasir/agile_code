@@ -57,8 +57,7 @@ class PosPaymentInherit(models.Model):
 
 	@api.model
 	def create(self, vals):
-		import pdb
-		pdb.set_trace()
+		
 
 		if vals.get('pos_order_id',False):
 			pos_order = self.env['pos.order'].sudo().browse(vals.get('pos_order_id'))
