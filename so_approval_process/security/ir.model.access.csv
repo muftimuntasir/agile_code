@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_so_approval_range,so.approval.range,model_so_approval_range,group_so_approval_user,1,0,0,0
+access_so_approval_range,so.approval.range,model_so_approval_range,group_so_approval_manager,1,1,1,1

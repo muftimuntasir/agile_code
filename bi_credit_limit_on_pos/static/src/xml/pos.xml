@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="bi_loyalty_generic_template" inherit_id="point_of_sale.template" xml:space="preserve">
+	<t t-extend="PartnerListScreenWidget" t-inherit="point_of_sale.PartnerListScreen" t-inherit-mode="extension" owl="1">
+		<xpath expr="//table[hasclass('partner-list')]/thead/tr" position="inside">
+			<th>Credit</th>
+			<th>Credit Limit</th>
+		</xpath>
+	</t>
+	
+	<t t-name="PartnerLine" t-inherit="point_of_sale.PartnerLine" t-inherit-mode="extension" owl="1">
+        <xpath expr="//tr[1]" position="inside">
+        	<td>
+				<t t-esc='env.pos.format_currency_no_symbol(props.partner.custom_credit) or "0"' />
+            </td>
+			<td id="bal">
+				<t t-esc='env.pos.format_currency_no_symbol(props.partner.blocking_amount) or "0"' />
+			</td>
+        </xpath>
+    </t>
+
+	<t t-name="BiWarningPopup" owl="1">
+        <div role="dialog" id="hold" class="modal-dialog">
+            <div class="popup tag_popup" style="padding:10px;overflow:hidden;margin-top:20px;width: 345px !important;">
+                <div style="overflow:hideen">
+                    <div class="body">
+						<t t-esc="props.body"/><br/><br/>
+						Current Credit: <t t-esc="props.custom_credit"/>.<br/>
+						Credit Limit: <t t-esc="props.blocking_amount"/>
+                    </div>
+                </div>
+                <div class="buttons-add-cancel">
+                    <div class="button confirm" t-on-click="confirm">
+                       OK
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+	<t t-name="BiWarningBlockingPopup" owl="1">
+        <div role="dialog" id="hold" class="modal-dialog">
+            <div class="popup popup-error" style="overflow:hidden;margin-top:20px;width: 464px !important;">
+                <div style="overflow:hideen">
+					<div class="title">
+						<t t-esc="props.title"/>
+					</div>
+                    <div class="body">
+						Credit Limit: <t t-esc="props.blocking_amount"/><br/>
+						Your Current Credit: <t t-esc="props.custom_credit"/><br/>
+						Your Available Credit: <t t-esc="props.available_credit"/><br/>
+						Please Pay using a different Payment Method.
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="button confirm" t-on-click="confirm">
+                       OK
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

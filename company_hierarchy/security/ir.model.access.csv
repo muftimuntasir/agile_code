@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_company_hierarchy,company.hierarchy,model_company_hierarchy,base.group_user,1,1,1,1
+access_parent_hierarchy,parent.hierarchy,model_parent_hierarchy,base.group_user,1,1,1,1
+access_customer_group,customer.group,model_customer_group,base.group_user,1,1,1,1

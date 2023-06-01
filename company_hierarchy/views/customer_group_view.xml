@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="customer_group_tree">
+            <field name="name">customer.group.tree</field>
+            <field name="model">customer.group</field>
+            <field name="arch" type="xml">
+                <tree string="Customer Group List">
+                    <field name="name"/>
+                    
+                </tree>
+            </field>
+        </record>
+
+        <record id="customer_group_form_view" model="ir.ui.view">
+            <field name="name">customer.group.form</field>
+            <field name="model">customer.group</field>
+            <field name="arch" type="xml">
+                <form string="Customer Group">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                           
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="customer_group_form_action" model="ir.actions.act_window">
+            <field name="name">Customer Group</field>
+            <field name="res_model">customer.group</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_customer_group" name="Customer Group" action="customer_group_form_action"
+                  parent="point_of_sale.menu_point_of_sale" sequence="7"/>
+
+    </data>
+</odoo>

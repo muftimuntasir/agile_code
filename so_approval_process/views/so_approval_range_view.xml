@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="so_approval_range_tree">
+            <field name="name">so.approval.range.tree</field>
+            <field name="model">so.approval.range</field>
+            <field name="arch" type="xml">
+                <tree string="SO Approval Range List">
+                    <field name="name"/>
+                    <field name="cfo"/>
+                    <field name="ceo"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="so_approval_range_form_view" model="ir.ui.view">
+            <field name="name">so.approval.range.form</field>
+            <field name="model">so.approval.range</field>
+            <field name="arch" type="xml">
+                <form string="SO Approval Range">
+<!--                    <header>-->
+<!--                        <button name="save" type='object' string='Save'/>-->
+<!--                    </header>-->
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="active" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="cfo"/>
+                                <label for="cfo_cash_limit_from" string="Cash Limit"/>
+                                <div>
+                                    <field name="cfo_cash_limit_from" class="oe_inline"/>
+                                    -
+                                    <field name="cfo_cash_limit_to" class="oe_inline"/>
+                                </div>
+                                <label for="cfo_credit_limit_from" string="Credit Limit"/>
+                                <div>
+                                    <field name="cfo_credit_limit_from" class="oe_inline"/>
+                                    -
+                                    <field name="cfo_credit_limit_to" class="oe_inline"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="ceo"/>
+                                <label for="ceo_cash_limit_from" string="Cash Limit"/>
+                                <div>
+                                    <field name="ceo_cash_limit_from" class="oe_inline"/>
+                                    -
+                                    <field name="ceo_cash_limit_to" class="oe_inline"/>
+                                </div>
+                                <label for="ceo_credit_limit_from" string="Credit Limit"/>
+                                <div>
+                                    <field name="ceo_credit_limit_from" class="oe_inline"/>
+                                    -
+                                    <field name="ceo_credit_limit_to" class="oe_inline"/>
+                                </div>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="so_approval_range_form_action" model="ir.actions.act_window">
+            <field name="name">SO Approval Range</field>
+            <field name="res_model">so.approval.range</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_so_approval_range" name="SO Approval Range" action="so_approval_range_form_action"
+                  parent="sale.menu_sales_config" sequence="5" groups="group_so_approval_manager"/>
+
+    </data>
+</odoo>

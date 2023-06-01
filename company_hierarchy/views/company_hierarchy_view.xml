@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="company_hierarchy_tree">
+            <field name="name">company.hierarchy.tree</field>
+            <field name="model">company.hierarchy</field>
+            <field name="arch" type="xml">
+                <tree string="Company Hierarchy List">
+                    <field name="name"/>
+                    <field name="parent_hierarchy_id"/>
+                    <field name="monthly"/>
+                    <field name="credit_limit"/>
+                    <field name="report_date"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="company_hierarchy_form_view" model="ir.ui.view">
+            <field name="name">company.hierarchy.form</field>
+            <field name="model">company.hierarchy</field>
+            <field name="arch" type="xml">
+                <form string="Company Hierarchy">
+                    <header>
+                        <button name="save" type='object' string='Assigned'/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_hierarchy_id"/>
+                            <field name="monthly"/>
+                            <field name="credit_limit"/>
+                            <field name="report_date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="company_hierarchy_form_action" model="ir.actions.act_window">
+            <field name="name">Company Hierarchy</field>
+            <field name="res_model">company.hierarchy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_company_hierarchy" name="Company Hierarchy" action="company_hierarchy_form_action"
+                  parent="point_of_sale.menu_point_of_sale" sequence="5"/>
+
+    </data>
+</odoo>

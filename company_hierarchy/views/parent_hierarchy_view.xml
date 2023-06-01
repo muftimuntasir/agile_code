@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="parent_hierarchy_tree">
+            <field name="name">parent.hierarchy.tree</field>
+            <field name="model">parent.hierarchy</field>
+            <field name="arch" type="xml">
+                <tree string="Parent Hierarchy List">
+                    <field name="name"/>
+                    <field name="report_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="parent_hierarchy_form_view" model="ir.ui.view">
+            <field name="name">parent.hierarchy.form</field>
+            <field name="model">parent.hierarchy</field>
+            <field name="arch" type="xml">
+                <form string="Parent Hierarchy">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="report_date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="parent_hierarchy_form_action" model="ir.actions.act_window">
+            <field name="name">Parent Hierarchy</field>
+            <field name="res_model">parent.hierarchy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,activity</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_parent_hierarchy" name="Parent Hierarchy" action="parent_hierarchy_form_action"
+                  parent="point_of_sale.menu_point_of_sale" sequence="6"/>
+
+    </data>
+</odoo>
