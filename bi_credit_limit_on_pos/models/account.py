@@ -34,7 +34,8 @@ class ResUsersInherit(models.Model):
 	@api.depends('pos_order_ids','pos_order_ids.state','pos_order_ids.amount_paid')
 	def _compute_pos_credit(self):
 		for rec in self:
-			pos_credit = sum(odr.credit_amount for odr in rec.pos_order_ids)
+			pos_credit = sum((odr.credit_amount if odr.is_credit == True else 0.00) for odr in rec.pos_order_ids)
+
 			rec.custom_credit = pos_credit
 			rec.available_credit = rec.blocking_amount - pos_credit
 
@@ -57,8 +58,7 @@ class PosPaymentInherit(models.Model):
 
 	@api.model
 	def create(self, vals):
-		import pdb
-		pdb.set_trace()
+
 
 		if vals.get('pos_order_id',False):
 			pos_order = self.env['pos.order'].sudo().browse(vals.get('pos_order_id'))
@@ -206,3 +206,27 @@ class POSOrder(models.Model):
 
 				pickings = self.env['stock.picking']._create_picking_from_pos_order_lines(destination_id, self.lines, picking_type, self.partner_id)
 				pickings.write({'pos_session_id': self.session_id.id, 'pos_order_id': self.id, 'origin': self.name})
+
+
+	class CashFlow(models.Model):
+		_inherit = 'account.account'
+
+		@api.constrains('account_type')
+		def _check_account_is_bank_journal_bank_account(self):
+			self.env['account.account'].flush_model(['account_type'])
+			self.env['account.journal'].flush_model(['type', 'default_account_id'])
+			self._cr.execute('''
+					SELECT journal.id
+					  FROM account_journal journal
+					  JOIN account_account account ON journal.default_account_id = account.id
+					 WHERE account.account_type IN ('asset_receivable', 'liability_payable')
+					   AND account.id IN %s
+					 LIMIT 1;
+				''', [tuple(self.ids)])
+
+			# if self._cr.fetchone():
+			# 	raise ValidationError(
+			# 		_("You cannot change the type of an account set as Bank Account on a journal to Receivable or Payable."))
+			#
+			#
+

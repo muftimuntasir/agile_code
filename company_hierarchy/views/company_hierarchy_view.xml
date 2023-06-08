@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <tree string="Company Hierarchy List">
                     <field name="name"/>
-                    <field name="parent_hierarchy_id"/>
+                    <field name="sub_company_id"/>
                     <field name="monthly"/>
                     <field name="credit_limit"/>
                     <field name="report_date"/>
@@ -27,7 +27,8 @@
                     <sheet>
                         <group>
                             <field name="name"/>
-                            <field name="parent_hierarchy_id"/>
+
+                            <field name="sub_company_id"/>
                             <field name="monthly"/>
                             <field name="credit_limit"/>
                             <field name="report_date"/>
